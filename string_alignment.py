@@ -273,6 +273,14 @@ def encode_awalan(kata_imbuhan, kata_dasar):
     if tampung!='':
         tampung+='~ '
 
+    # print(len(tampung))
+    # print(tampung[2:])
+    if tampung[:2]=='se' and len(tampung)>4:
+        tampung = 'se~ ' + tampung[2:]
+
+    if tampung[:2]=='ke' and len(tampung)>4:
+        tampung = 'ke~ ' + tampung[2:]
+
     return tampung
 
 def encode_akhiran(kata_imbuhan, kata_dasar):

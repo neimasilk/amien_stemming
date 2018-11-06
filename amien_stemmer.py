@@ -38,6 +38,8 @@ if __name__ == '__main__':
     word = 'temaniku'
     word = 'makananku'
     word = 'putuskanlah'
+    word = 'seperjuangan'
+    word= 'menyupir'
     print(encode_word(word))
     # print(TextNormalizer.normalize_text(sentence))
 
