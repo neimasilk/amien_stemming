@@ -213,7 +213,6 @@ def stem_plural_word(plural):
     if not matches:
         return plural
     words = [matches.group(1), matches.group(2)]
-
     #malaikat-malaikat-nya -> malaikat malaikat-nya
     suffix = words[1]
     suffixes = ['ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun']
@@ -225,6 +224,7 @@ def stem_plural_word(plural):
     #berbalas-balasan -> balas
     rootWord1 = stem_singular_word(words[0])
     rootWord2 = stem_singular_word(words[1])
+
     #meniru-nirukan -> tiru
     a=stem_singular_word(words[0])
     if (a!=words[1]) and rootWord2 == words[1]:
@@ -232,6 +232,8 @@ def stem_plural_word(plural):
         root2 = list(rootWord2)
         root2[0]='n'
         rootWord2 = "".join(root2)
+        # print(rootWord1)
+        # print(rootWord2)
         return rootWord2+'-'+rootWord2
 
     if rootWord1 == rootWord2:
@@ -281,6 +283,9 @@ def encode_awalan(kata_imbuhan, kata_dasar):
     if tampung[:2]=='ke' and len(tampung)>4:
         tampung = 'ke~ ' + tampung[2:]
 
+    if tampung[:3]=='mem' and len(tampung)>5:
+        tampung = 'mem~ ' + tampung[3:]
+
     return tampung
 
 def encode_akhiran(kata_imbuhan, kata_dasar):
@@ -317,13 +322,17 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
 
 
 def encode_word(text1):
+    text1 = text1.lower()
     text2 = stemku.stem(text1)
     if is_plural(text1):
         textprl = stem_plural_word(text1)
-        if text2!=textprl:
+        # print(text2)
+        # print(textprl)
+        # print(text1)
+        if text2!=text1:
             hasil = encode_awalan(text1,textprl)+'ulg~ '+text2+encode_akhiran(text1,textprl)
         else:
-            hasil = encode_awalan(text1,textprl)+text2+encode_akhiran(text1,textprl)
+            hasil = encode_awalan(text1,text2)+text2+encode_akhiran(text1,text2)
     else:
         hasil = encode_awalan(text1, text2) + text2 + encode_akhiran(text1, text2)
     return hasil

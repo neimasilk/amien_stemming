@@ -30,16 +30,16 @@ def encode(text):
 if __name__ == '__main__':
 
     # stemming process
-    sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan, kami sangat membangga-banggakannya.'
-
+    # sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan, kami sangat membangga-banggakannya.'
+    sentence ='Lapangan sepak bola itu selalu dijaga dan dipelihara karena merupakan tempat latihan Timnas U-19.'
     print(sentence)
-    # print(encode(sentence))
+    print(encode(sentence))
 
     word = 'temaniku'
     word = 'makananku'
     word = 'putuskanlah'
     word = 'seperjuangan'
-    word= 'menyupir'
+    word= 'pertanggungan'
     print(encode_word(word))
     # print(TextNormalizer.normalize_text(sentence))
 
