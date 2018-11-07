@@ -239,7 +239,7 @@ def stem_plural_word(plural):
     if rootWord1 == rootWord2:
         return rootWord1+'-'+rootWord1
     else:
-        return plural
+        return stem_singular_word(plural)
 
 def stem_singular_word(word):
     """Stem a singular word to its common stem form."""
@@ -272,8 +272,6 @@ def encode_awalan(kata_imbuhan, kata_dasar):
         else:
             break
         pos+=1
-    if tampung!='':
-        tampung+='~ '
 
     # print(len(tampung))
     # print(tampung[2:])
@@ -285,6 +283,8 @@ def encode_awalan(kata_imbuhan, kata_dasar):
 
     if tampung[:3]=='mem' and len(tampung)>5:
         tampung = 'mem~ ' + tampung[3:]
+    if tampung!='':
+        tampung+='~ '
 
     return tampung
 
@@ -306,7 +306,6 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
         if mulai_kata and akhiran:
             tampung+=char
         pos+=1
-    if tampung==' ~': tampung=''
     # print(len(tampung))
     # print(tampung[3:])
     if tampung[:3]==' ~i' and len(tampung)>3:
@@ -318,11 +317,22 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
     if tampung[:5]==' ~kan' and len(tampung)>5:
         tampung = ' ~kan' + ' ~' + tampung[5:]
 
+    if tampung == ' ~':
+        tampung = ''
+
+
     return tampung
 
 
 def encode_word(text1):
     text1 = text1.lower()
+    text1 = text1.strip()
+    if not text1[-1].isalpha():
+        char_akhir = text1[-1]
+        text1= text1[:-1]
+    else:
+        char_akhir =''
+    # text1 = TextNormalizer.normalize_text(text1)
     text2 = stemku.stem(text1)
     if is_plural(text1):
         textprl = stem_plural_word(text1)
@@ -330,11 +340,11 @@ def encode_word(text1):
         # print(textprl)
         # print(text1)
         if text2!=text1:
-            hasil = encode_awalan(text1,textprl)+'ulg~ '+text2+encode_akhiran(text1,textprl)
+            hasil = encode_awalan(text1,textprl)+'ulg~ '+text2+encode_akhiran(text1,textprl)+char_akhir
         else:
-            hasil = encode_awalan(text1,text2)+text2+encode_akhiran(text1,text2)
+            hasil = encode_awalan(text1,text2)+text2+encode_akhiran(text1,text2)+char_akhir
     else:
-        hasil = encode_awalan(text1, text2) + text2 + encode_akhiran(text1, text2)
+        hasil = encode_awalan(text1, text2) + text2 + encode_akhiran(text1, text2)+char_akhir
     return hasil
 
 
@@ -348,10 +358,11 @@ if __name__ == '__main__':
     # print(tata(kata1,kata2))
     word1 = 'biji-bijian'
     word2 = 'kupu-kupu'
-
-    word = 'memakani'
+    word3 = 'jalan-jalan.'
+    word = 'pertanggungan'
     word_plural1 = 'meniru-nirukan'
     word_plural2 = 'berbalas-balasan'
     print(stemku.stem(word))
     # print(stem_plural_word(word_plural1))
-    # print(encode_word(word_plural1))
+    print(encode_word(word))
+    # print(encode_word(word3))

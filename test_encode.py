@@ -5,7 +5,7 @@ from amien_stemmer import encode
 class TestEncode(TestCase):
     def test_encode_kalimat(self):
         text1='Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan, kami sangat membangga-banggakannya.'
-        text_hasil1 = 'per~ ekonomi ~an indonesia sedang dalam per~ tumbuh ~an yang mem~ bangga ~kan, kami sangat mem~ ulg~ bangga ~kannya.'
+        text_hasil1 = 'per~ ekonomi ~an indonesia sedang dalam per~ tumbuh ~an yang mem~ bangga ~kan, kami sangat mem~ ulg~ bangga ~kan ~nya.'
         self.assertEqual(text_hasil1,encode(text1))
 
     def test_encode_kata_plural(self):
