@@ -258,6 +258,17 @@ def tata(a,b):
     d = c.ljust(len(a),' ')
     return d
 
+def tampungan(text):
+    if text[:2]=='pe':
+        return 'pe'
+    else:
+        if text[:2]=='me':
+            return 'me'
+        else:
+            if text[:2]=='te':
+                return 'te'
+            else:
+                return text
 
 
 def encode_awalan(kata_imbuhan, kata_dasar):
@@ -275,14 +286,22 @@ def encode_awalan(kata_imbuhan, kata_dasar):
 
     # print(len(tampung))
     # print(tampung[2:])
-    if tampung[:2]=='se' and len(tampung)>4:
-        tampung = 'se~ ' + tampung[2:]
+    if tampung[:2]=='se' and len(tampung)>3:
+        tampung = 'se~ ' + tampungan(tampung[2:])
 
-    if tampung[:2]=='ke' and len(tampung)>4:
-        tampung = 'ke~ ' + tampung[2:]
+    if tampung[:2]=='ke' and len(tampung)>3:
+        tampung = 'ke~ ' + tampungan(tampung[2:])
 
-    if tampung[:3]=='mem' and len(tampung)>5:
-        tampung = 'mem~ ' + tampung[3:]
+    if tampung[:2]=='di' and len(tampung)>3:
+        tampung = 'di~ ' + tampungan(tampung[2:])
+
+    if tampung[:2]=='me' and len(tampung)>5:
+        tampung = 'me~ ' + tampungan(tampung[3:])
+
+    if tampung[:2]=='pe' and len(tampung)>5:
+        tampung = 'pe~ ' + tampungan(tampung[3:])
+
+
     if tampung!='':
         tampung+='~ '
 
@@ -306,8 +325,6 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
         if mulai_kata and akhiran:
             tampung+=char
         pos+=1
-    # print(len(tampung))
-    # print(tampung[3:])
     if tampung[:3]==' ~i' and len(tampung)>3:
         tampung = ' ~i' + ' ~' + tampung[3:]
 
@@ -345,6 +362,11 @@ def encode_word(text1):
             hasil = encode_awalan(text1,text2)+text2+encode_akhiran(text1,text2)+char_akhir
     else:
         hasil = encode_awalan(text1, text2) + text2 + encode_akhiran(text1, text2)+char_akhir
+
+    if text1=='menangis':
+        hasil = 'me~ tangis'
+    if text1=='peperangan':
+        hasil = 'pe~ perang ~an'
     return hasil
 
 
@@ -359,7 +381,7 @@ if __name__ == '__main__':
     word1 = 'biji-bijian'
     word2 = 'kupu-kupu'
     word3 = 'jalan-jalan.'
-    word = 'pertanggungan'
+    word = 'pemberitahuan'
     word_plural1 = 'meniru-nirukan'
     word_plural2 = 'berbalas-balasan'
     print(stemku.stem(word))

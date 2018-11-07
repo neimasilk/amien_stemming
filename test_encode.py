@@ -30,10 +30,22 @@ class TestEncode(TestCase):
         text10='termakan'
         text10_hsl= 'ter~ makan'
         text11='sepemakan'
-        text11_hsl='sepe~ makan'
+        text11_hsl='se~ pe~ makan'
         text12 = 'membebani'
         text12_hsl = 'mem~ beban ~i'
 
+        word1 = 'biji-bijian'
+        word1_hsl = 'ulg~ biji ~an'
+        word2 = 'kupu-kupu'
+        word2_hsl = 'kupu-kupu'
+        word3 = 'jalan-jalan.'
+        word3_hsl = 'ulg~ jalan.'
+        word = 'menyejahterakan'
+        word_hsl = 'me~ sejahtera ~kan'
+        word_plural1 = 'meniru-nirukan'
+        word_plural1_hsl = 'me~ ulg~ tiru ~kan'
+        word_plural2 = 'berbalas-balasan'
+        word_plural2_hsl = 'ber~ ulg~ balas ~an'
         # Inflection Suffixes (“-lah”, “-kah”, “-ku”, “-mu”, atau “-nya”) dibuang.
         # Jika berupa particles (“-lah”, “-kah”, “-tah” atau “-pun”)
         # maka langkah ini diulangi lagi untuk menghapus Possesive Pronouns (“-ku”, “-mu”, atau “-nya”), jika ada.
@@ -57,3 +69,10 @@ class TestEncode(TestCase):
         self.assertEqual(text11_hsl,encode(text11))
         self.assertEqual(text12_hsl,encode(text12))
         self.assertEqual(text_lah_hsl,encode(text_lah))
+
+        self.assertEqual(word1_hsl,encode(word1))
+        self.assertEqual(word2_hsl,encode(word2))
+        self.assertEqual(word3_hsl,encode(word3))
+        self.assertEqual(word_hsl,encode(word_hsl))
+        self.assertEqual(word_plural1_hsl,encode(word_plural1))
+        self.assertEqual(word_plural2_hsl,encode(word_plural2))
