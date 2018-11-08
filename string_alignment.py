@@ -367,6 +367,19 @@ def encode_word(text1):
         hasil = 'me~ tangis'
     if text1=='peperangan':
         hasil = 'pe~ perang ~an'
+    if text1=='pemberitahuan':
+        hasil = 'pe~ beritahu ~an'
+    if text1=='pemilu':
+        hasil = 'pemilu'
+    if text1=='bagian':
+        hasil = 'bagian'
+    if text1=='mengecek':
+        hasil = 'me~ cek'
+    if text1=='mengakomodir':
+        hasil = 'me~ akomodir'
+
+
+
     return hasil
 
 
@@ -382,6 +395,11 @@ if __name__ == '__main__':
     word2 = 'kupu-kupu'
     word3 = 'jalan-jalan.'
     word = 'pemberitahuan'
+    word = 'pemilu'
+    word = 'sebagai'
+    word = 'bagian'
+    word = 'mengecek'
+    word = 'mengakomodir'
     word_plural1 = 'meniru-nirukan'
     word_plural2 = 'berbalas-balasan'
     print(stemku.stem(word))
