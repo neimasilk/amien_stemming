@@ -8,10 +8,12 @@
 # https://github.com/alevchuk/pairwise-alignment-in-python
 
 import sys
+
 sys.path.insert(0, './pysastrawi/src')
 from pysastrawi.src.Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-from Sastrawi.Stemmer.Filter import TextNormalizer
+# from Sastrawi.Stemmer.Filter import TextNormalizer
 import re
+
 
 def zeros(shape):
     retval = []
@@ -72,7 +74,7 @@ def finalize(align1, align2):
     # print(align1)
     # print(symbol)
     # print(align2)
-    return align1,symbol,align2
+    return align1, symbol, align2
 
 
 def needle(seq1, seq2):
@@ -127,7 +129,7 @@ def needle(seq1, seq2):
         j -= 1
 
     aln1, smbl, aln2 = finalize(align1, align2)
-    return aln1,smbl,aln2
+    return aln1, smbl, aln2
 
 
 def water(seq1, seq2):
@@ -179,11 +181,13 @@ def water(seq1, seq2):
             i -= 1
 
     aln1, smbl, aln2 = finalize(align1, align2)
-    return aln1,smbl,aln2
+    return aln1, smbl, aln2
+
 
 # ========================================================================
 factory = StemmerFactory()
 stemku = factory.create_stemmer()
+
 
 # TODO SELANJUTNYA: buat encode untuk plural
 # def stem_word(word):
@@ -195,13 +199,14 @@ stemku = factory.create_stemmer()
 #
 
 def is_plural(word):
-    #-ku|-mu|-nya
-    #nikmat-Ku, etc
+    # -ku|-mu|-nya
+    # nikmat-Ku, etc
     matches = re.match(r'^(.*)-(ku|mu|nya|lah|kah|tah|pun)$', word)
     if matches:
         return matches.group(1).find('-') != -1
 
     return word.find('-') != -1
+
 
 def stem_plural_word(plural):
     """Stem a plural word to its common stem form.
@@ -213,7 +218,7 @@ def stem_plural_word(plural):
     if not matches:
         return plural
     words = [matches.group(1), matches.group(2)]
-    #malaikat-malaikat-nya -> malaikat malaikat-nya
+    # malaikat-malaikat-nya -> malaikat malaikat-nya
     suffix = words[1]
     suffixes = ['ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun']
     matches = re.match(r'^(.*)-(.*)$', words[0])
@@ -221,31 +226,33 @@ def stem_plural_word(plural):
         words[0] = matches.group(1)
         words[1] = matches.group(2) + '-' + suffix
 
-    #berbalas-balasan -> balas
+    # berbalas-balasan -> balas
     rootWord1 = stem_singular_word(words[0])
     rootWord2 = stem_singular_word(words[1])
 
-    #meniru-nirukan -> tiru
-    a=stem_singular_word(words[0])
-    if (a!=words[1]) and rootWord2 == words[1]:
+    # meniru-nirukan -> tiru
+    a = stem_singular_word(words[0])
+    if (a != words[1]) and rootWord2 == words[1]:
         rootWord2 = stem_singular_word('me' + words[1])
         root2 = list(rootWord2)
-        root2[0]='n'
+        root2[0] = 'n'
         rootWord2 = "".join(root2)
         # print(rootWord1)
         # print(rootWord2)
-        return rootWord2+'-'+rootWord2
+        return rootWord2 + '-' + rootWord2
 
     if rootWord1 == rootWord2:
-        return rootWord1+'-'+rootWord1
+        return rootWord1 + '-' + rootWord1
     else:
         return stem_singular_word(plural)
+
 
 def stem_singular_word(word):
     """Stem a singular word to its common stem form."""
     return stemku.stem(word)
 
-def tata(a,b):
+
+def tata(a, b):
     seq1 = list(a)
     seq2 = list(b)
     aln1, smbl, aln2 = needle(seq1, seq2)
@@ -253,19 +260,20 @@ def tata(a,b):
     for char in aln1:
         if char == smbl[pos]:
             break
-        pos+=1
-    c = b.rjust(pos+len(b), ' ')
-    d = c.ljust(len(a),' ')
+        pos += 1
+    c = b.rjust(pos + len(b), ' ')
+    d = c.ljust(len(a), ' ')
     return d
 
+
 def tampungan(text):
-    if text[:2]=='pe':
+    if text[:2] == 'pe':
         return 'pe'
     else:
-        if text[:2]=='me':
+        if text[:2] == 'me':
             return 'me'
         else:
-            if text[:2]=='te':
+            if text[:2] == 'te':
                 return 'te'
             else:
                 return text
@@ -279,39 +287,39 @@ def encode_awalan(kata_imbuhan, kata_dasar):
     pos = 0
     for char in aln1:
         if char != smbl[pos]:
-            tampung+=char
+            tampung += char
         else:
             break
-        pos+=1
+        pos += 1
 
     # print(len(tampung))
     # print(tampung[2:])
-    if tampung[:2]=='se' and len(tampung)>3:
+    if tampung[:2] == 'se' and len(tampung) > 3:
         tampung = 'se~ ' + tampungan(tampung[2:])
 
-    if tampung[:2]=='ke' and len(tampung)>3:
+    if tampung[:2] == 'ke' and len(tampung) > 3:
         tampung = 'ke~ ' + tampungan(tampung[2:])
 
-    if tampung[:2]=='di' and len(tampung)>3:
+    if tampung[:2] == 'di' and len(tampung) > 3:
         tampung = 'di~ ' + tampungan(tampung[2:])
 
-    if tampung[:2]=='me' and len(tampung)>5:
+    if tampung[:2] == 'me' and len(tampung) > 5:
         tampung = 'me~ ' + tampungan(tampung[3:])
 
-    if tampung[:2]=='pe' and len(tampung)>5:
+    if tampung[:2] == 'pe' and len(tampung) > 5:
         tampung = 'pe~ ' + tampungan(tampung[3:])
 
-
-    if tampung!='':
-        tampung+='~ '
+    if tampung != '':
+        tampung += '~ '
 
     return tampung
+
 
 def encode_akhiran(kata_imbuhan, kata_dasar):
     seq1 = list(kata_imbuhan)
     seq2 = list(kata_dasar)
     aln1, smbl, aln2 = needle(seq1, seq2)
-    smbl = tata(kata_imbuhan,kata_dasar)
+    smbl = tata(kata_imbuhan, kata_dasar)
     tampung = ' ~'
     pos = 0
     mulai_kata = False
@@ -323,20 +331,19 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
             if mulai_kata:
                 akhiran = True
         if mulai_kata and akhiran:
-            tampung+=char
-        pos+=1
-    if tampung[:3]==' ~i' and len(tampung)>3:
+            tampung += char
+        pos += 1
+    if tampung[:3] == ' ~i' and len(tampung) > 3:
         tampung = ' ~i' + ' ~' + tampung[3:]
 
-    if tampung[:4]==' ~an' and len(tampung)>4:
+    if tampung[:4] == ' ~an' and len(tampung) > 4:
         tampung = ' ~an' + ' ~' + tampung[4:]
 
-    if tampung[:5]==' ~kan' and len(tampung)>5:
+    if tampung[:5] == ' ~kan' and len(tampung) > 5:
         tampung = ' ~kan' + ' ~' + tampung[5:]
 
     if tampung == ' ~':
         tampung = ''
-
 
     return tampung
 
@@ -346,9 +353,9 @@ def encode_word(text1):
     text1 = text1.strip()
     if not text1[-1].isalpha():
         char_akhir = text1[-1]
-        text1= text1[:-1]
+        text1 = text1[:-1]
     else:
-        char_akhir =''
+        char_akhir = ''
     # text1 = TextNormalizer.normalize_text(text1)
     text2 = stemku.stem(text1)
     if is_plural(text1):
@@ -356,35 +363,32 @@ def encode_word(text1):
         # print(text2)
         # print(textprl)
         # print(text1)
-        if text2!=text1:
-            hasil = encode_awalan(text1,textprl)+'ulg~ '+text2+encode_akhiran(text1,textprl)+char_akhir
+        if text2 != text1:
+            hasil = encode_awalan(text1, textprl) + 'ulg~ ' + text2 + encode_akhiran(text1, textprl) + char_akhir
         else:
-            hasil = encode_awalan(text1,text2)+text2+encode_akhiran(text1,text2)+char_akhir
+            hasil = encode_awalan(text1, text2) + text2 + encode_akhiran(text1, text2) + char_akhir
     else:
-        hasil = encode_awalan(text1, text2) + text2 + encode_akhiran(text1, text2)+char_akhir
+        hasil = encode_awalan(text1, text2) + text2 + encode_akhiran(text1, text2) + char_akhir
 
-    if text1=='menangis':
+    if text1 == 'menangis':
         hasil = 'me~ tangis'
-    if text1=='peperangan':
+    if text1 == 'peperangan':
         hasil = 'pe~ perang ~an'
-    if text1=='pemberitahuan':
+    if text1 == 'pemberitahuan':
         hasil = 'pe~ beritahu ~an'
-    if text1=='pemilu':
+    if text1 == 'pemilu':
         hasil = 'pemilu'
-    if text1=='bagian':
+    if text1 == 'bagian':
         hasil = 'bagian'
-    if text1=='mengecek':
+    if text1 == 'mengecek':
         hasil = 'me~ cek'
-    if text1=='mengakomodir':
+    if text1 == 'mengakomodir':
         hasil = 'me~ akomodir'
-
-
 
     return hasil
 
 
 if __name__ == '__main__':
-
     kata1 = 'meniru-nirukannya'
 
     # print(encode_awalan(kata1,kata2))
