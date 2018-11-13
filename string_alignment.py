@@ -292,6 +292,7 @@ def encode_awalan(kata_imbuhan, kata_dasar):
             break
         pos += 1
 
+
     # print(len(tampung))
     # print(tampung[2:])
     if tampung[:2] == 'se' and len(tampung) > 3:
@@ -308,6 +309,12 @@ def encode_awalan(kata_imbuhan, kata_dasar):
 
     if tampung[:2] == 'pe' and len(tampung) > 5:
         tampung = 'pe~ ' + tampungan(tampung[3:])
+
+    if tampung[:2] == 'be' and len(tampung) < 5:
+        tampung = 'ber' + tampungan(tampung[3:])
+
+    if tampung[:2] == 'pe' and len(tampung) < 5:
+        tampung = 'pe' + tampungan(tampung[4:])
 
     if tampung != '':
         tampung += '~ '
@@ -358,6 +365,8 @@ def encode_word(text1):
         char_akhir = ''
     # text1 = TextNormalizer.normalize_text(text1)
     text2 = stemku.stem(text1)
+    if text2 == 'terna':
+        text2='ternak'
     if is_plural(text1):
         textprl = stem_plural_word(text1)
         # print(text2)
@@ -379,11 +388,16 @@ def encode_word(text1):
     if text1 == 'pemilu':
         hasil = 'pemilu'
     if text1 == 'bagian':
-        hasil = 'bagian'
+        hasil = 'bagi ~an'
     if text1 == 'mengecek':
         hasil = 'me~ cek'
     if text1 == 'mengakomodir':
         hasil = 'me~ akomodir'
+    if text1 == 'menyejahterakan':
+        hasil = 'me~ sejahtera ~kan'
+    if text1 == 'diperingan':
+        hasil = 'di~ pe~ ringan'
+
 
     return hasil
 
@@ -395,18 +409,42 @@ if __name__ == '__main__':
     # print(encode_akhiran(kata1,kata2))
     # tata(kata1, kata2)
     # print(tata(kata1,kata2))
+
+    # TESTING PERTAMA
     word1 = 'biji-bijian'
     word2 = 'kupu-kupu'
     word3 = 'jalan-jalan.'
     word = 'pemberitahuan'
-    word = 'pemilu'
-    word = 'sebagai'
-    word = 'bagian'
-    word = 'mengecek'
-    word = 'mengakomodir'
-    word_plural1 = 'meniru-nirukan'
-    word_plural2 = 'berbalas-balasan'
-    print(stemku.stem(word))
-    # print(stem_plural_word(word_plural1))
+    # word = 'pemilu'
+    # word = 'sebagai'
+    # word = 'bagian'
+    # word = 'mengecek'
+    # word = 'mengakomodir'
+    # word_plural1 = 'meniru-nirukan'
+    # word_plural2 = 'berbalas-balasan'
+    print(stemku.stem('peternakan'))
+    # # print(stem_plural_word(word_plural1))
+    #
+    # # TESTING KEDUA FOKUS DI BER
+    # word = 'berkenaan' # ok
+    # word = 'berangan-angan' #not ok
+    # word = 'beraktifitas' # not ok
+    # word = 'beristri' #ok
+    # word = 'berenang' #ok
+    # word = 'belajar'
+    # word = 'bekerja' #ok
+
+
+    # # TESTING KETIGA FOKUS DI TER
+    # word = 'ketersediaan' # ok
+    # word = 'terbaik' #ok
+    # word = 'tercecer-cecer' #ok
+
+    # TESTING KETIGA FOKUS DI PE
+    word = 'diperingan' # ok
+    word = 'peternakanku' #ok
+    word = 'perwujudan' #ok
+    word = 'sepemakaian' #NOT OK
+
     print(encode_word(word))
     # print(encode_word(word3))

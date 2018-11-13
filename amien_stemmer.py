@@ -20,7 +20,7 @@ def encode(text):
     stems = []
 
     for word in words:
-        hasil_stem = stemku.stem(word)
+        hasil_stem = encode_word(word)
         if hasil_stem!=word:
             hasil_stem=(encode_word(word))
         stems.append(hasil_stem)

@@ -5,7 +5,7 @@ from amien_stemmer import encode
 class TestEncode(TestCase):
     def test_encode_kalimat(self):
         text1='Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan, kami sangat membangga-banggakannya.'
-        text_hasil1 = 'per~ ekonomi ~an indonesia sedang dalam per~ tumbuh ~an yang mem~ bangga ~kan, kami sangat mem~ ulg~ bangga ~kan ~nya.'
+        text_hasil1 = 'pe~ ekonomi ~an indonesia sedang dalam pe~ tumbuh ~an yang mem~ bangga ~kan, kami sangat mem~ ulg~ bangga ~kan ~nya.'
         self.assertEqual(text_hasil1,encode(text1))
 
     def test_encode_kata_plural(self):
@@ -53,8 +53,42 @@ class TestEncode(TestCase):
         text_lah = 'janganlah'
         text_lah_hsl = 'jangan ~lah'
 
+        # TESTING PERTAMA
+        wword1 = 'biji-bijian'
+        wword1_hsl = 'ulg~ biji ~an'
+        wword2 = 'kupu-kupu'
+        wword2_hsl = 'kupu-kupu'
+        wword3 = 'jalan-jalan.'
+        wword3_hsl = 'ulg~ jalan.'
+        wword4 = 'pemberitahuan'
+        wword4_hsl = 'pe~ beritahu ~an'
+        wword5 = 'pemilu'
+        wword5_hsl = 'pemilu'
+        wword6 = 'sebagai'
+        wword6_hsl = 'se~ bagai'
+        wword7 = 'bagian'
+        wword7_hsl = 'bagi ~an'
+        wword8 = 'mengecek'
+        wword8_hsl = 'me~ cek'
+        wword9 = 'mengakomodir'
+        wword9_hsl = 'me~ akomodir'
 
+        # print(stemku.stem(word))
+        # print(stem_plural_word(word_plural1))
 
+        # # TESTING KEDUA FOKUS DI BER
+        # word = 'berkenaan'  # ok
+        # word = 'berangan-angan'  # not ok
+        # word = 'beraktifitas'  # not ok
+        # word = 'beristri'  # ok
+        # word = 'berenang'  # ok
+        # word = 'belajar'
+        # # word = 'bekerja' #ok
+        #
+        # # TESTING KETIGA FOKUS DI TER
+        # word = 'ketersediaan'  # ok
+        # word = 'terbaik'  # ok
+        # word = 'tercecer-cecer'  # ok
 
         self.assertEqual(text1_hsl,encode(text1))
         self.assertEqual(text2_hsl,encode(text2))
@@ -73,6 +107,17 @@ class TestEncode(TestCase):
         self.assertEqual(word1_hsl,encode(word1))
         self.assertEqual(word2_hsl,encode(word2))
         self.assertEqual(word3_hsl,encode(word3))
-        self.assertEqual(word_hsl,encode(word_hsl))
+        self.assertEqual(word_hsl,encode(word))
         self.assertEqual(word_plural1_hsl,encode(word_plural1))
         self.assertEqual(word_plural2_hsl,encode(word_plural2))
+
+
+        self.assertEqual(wword1_hsl,encode(wword1))
+        self.assertEqual(wword2_hsl,encode(wword2))
+        self.assertEqual(wword3_hsl,encode(wword3))
+        self.assertEqual(wword4_hsl,encode(wword4))
+        self.assertEqual(wword5_hsl,encode(wword5))
+        self.assertEqual(wword6_hsl,encode(wword6))
+        self.assertEqual(wword7_hsl,encode(wword7))
+        self.assertEqual(wword8_hsl,encode(wword8))
+        self.assertEqual(wword9_hsl,encode(wword9))
