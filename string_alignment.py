@@ -468,7 +468,7 @@ if __name__ == '__main__':
     word = 'peternakanku' #ok
     word = 'perwujudan' #ok
     word = 'pemakaian' #NOT OK
-    word = 'pemberitahuan' #NOT OK
+    word = 'diadukan' #NOT OK
 
 
     print(encode_word(word))
