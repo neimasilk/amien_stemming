@@ -267,6 +267,7 @@ def tata(a, b):
 
 
 def tampungan(text):
+    # print(text)
     if text[:2] == 'pe':
         return 'pe'
     else:
@@ -276,10 +277,16 @@ def tampungan(text):
             if text[:2] == 'te':
                 return 'te'
             else:
-                return text
+                if text[:2] == 'be':
+                    return 'be'
+                # else:
+    return ''
 
 
 def encode_awalan(kata_imbuhan, kata_dasar):
+    sp = False
+    if kata_dasar!=kata_imbuhan:
+        kata_dasar, sp = special_case(kata_dasar)
     seq1 = list(kata_imbuhan)
     seq2 = list(kata_dasar)
     aln1, smbl, aln2 = needle(seq1, seq2)
@@ -292,29 +299,36 @@ def encode_awalan(kata_imbuhan, kata_dasar):
             break
         pos += 1
 
+    if sp:
+        tampung=tampung[:-1]
 
+    # print(aln1)
+    # print(smbl)
+    #
     # print(len(tampung))
-    # print(tampung[2:])
+    # print(tampung[:2])
     if tampung[:2] == 'se' and len(tampung) > 3:
         tampung = 'se~ ' + tampungan(tampung[2:])
-
     if tampung[:2] == 'ke' and len(tampung) > 3:
         tampung = 'ke~ ' + tampungan(tampung[2:])
 
     if tampung[:2] == 'di' and len(tampung) > 3:
         tampung = 'di~ ' + tampungan(tampung[2:])
 
-    if tampung[:2] == 'me' and len(tampung) > 5:
+    if tampung[:2] == 'me' and len(tampung) > 3:
         tampung = 'me~ ' + tampungan(tampung[3:])
 
-    if tampung[:2] == 'pe' and len(tampung) > 5:
+    if tampung[:2] == 'pe' and len(tampung) > 3:
         tampung = 'pe~ ' + tampungan(tampung[3:])
 
-    if tampung[:2] == 'be' and len(tampung) < 5:
+    if tampung[:2] == 'be' and len(tampung) > 3:
         tampung = 'ber' + tampungan(tampung[3:])
 
     if tampung[:2] == 'pe' and len(tampung) < 5:
-        tampung = 'pe' + tampungan(tampung[4:])
+        tampung = 'pe'  # + tampungan(tampung[4:])
+
+    if tampung[:2] == 'me' and len(tampung) < 5:
+        tampung = 'me'  # + tampungan(tampung[4:])
 
     if tampung != '':
         tampung += '~ '
@@ -323,6 +337,9 @@ def encode_awalan(kata_imbuhan, kata_dasar):
 
 
 def encode_akhiran(kata_imbuhan, kata_dasar):
+    sp = False
+    if kata_dasar!=kata_imbuhan:
+        kata_dasar, sp= special_case(kata_dasar)
     seq1 = list(kata_imbuhan)
     seq2 = list(kata_dasar)
     aln1, smbl, aln2 = needle(seq1, seq2)
@@ -340,6 +357,7 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
         if mulai_kata and akhiran:
             tampung += char
         pos += 1
+
     if tampung[:3] == ' ~i' and len(tampung) > 3:
         tampung = ' ~i' + ' ~' + tampung[3:]
 
@@ -401,6 +419,11 @@ def encode_word(text1):
 
     return hasil
 
+def special_case(kata):
+    if kata[0] in ['p','w','y','g','h','q','k','b','f','v','r','c','d','j','z']:
+        return kata[1:], True
+    return kata, False
+
 
 if __name__ == '__main__':
     kata1 = 'meniru-nirukannya'
@@ -422,7 +445,7 @@ if __name__ == '__main__':
     # word = 'mengakomodir'
     # word_plural1 = 'meniru-nirukan'
     # word_plural2 = 'berbalas-balasan'
-    print(stemku.stem('peternakan'))
+    # print(stemku.stem('peternakan'))
     # # print(stem_plural_word(word_plural1))
     #
     # # TESTING KEDUA FOKUS DI BER
@@ -444,7 +467,8 @@ if __name__ == '__main__':
     word = 'diperingan' # ok
     word = 'peternakanku' #ok
     word = 'perwujudan' #ok
-    word = 'sepemakaian' #NOT OK
+    word = 'pemakaian' #NOT OK
+    word = 'pemberitahuan' #NOT OK
+
 
     print(encode_word(word))
-    # print(encode_word(word3))

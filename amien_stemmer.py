@@ -14,7 +14,7 @@ stemku = factory.create_stemmer()
 
 
 def encode(text):
-    normalizedText = text.lower() # TextNormalizer.normalize_text(text)
+    normalizedText = TextNormalizer.normalize_text(text)
 
     words = normalizedText.split(' ')
     stems = []
@@ -32,13 +32,19 @@ if __name__ == '__main__':
     # stemming process
     # sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan, kami sangat membangga-banggakannya.'
     sentence ='Benarkah semua korban gempa Aceh sudah terjamin kebutuhan pokoknya?'
+    sentence ='Jokowi mengatakan bahwa konsep Indo-Pasifik ini akan memberikan arah baru bagi kerjasama ASEAN dengan negara-negara mitranya sekaligus membuat sentralitas ASEAN di kawasan tetap terjaga. Artikel ini telah tayang di Kompas dengan judul "Jokowi Ungkap Pentingnya Indo-Pasific bagi ASEAN"'
+    sentence = '''Apalagi, kondisi itu diprediksi akan diperparah dengan tarik menarik konstelasi kekuatan dunia. Oleh sebab itu, Presiden Jokowi meminta ASEAN yang berada di tengah-tengah kawasan Indo- Pasific mampu menjadi poros maritim.
+
+Artikel ini telah tayang di Kompas.com dengan judul "Jokowi Ungkap Pentingnya Indo-Pasific bagi ASEAN", https://nasional.kompas.com/read/2018/11/14/09281661/jokowi-ungkap-pentingnya-indo-pasific-bagi-asean. 
+Penulis : Fabian Januarius Kuwado
+Editor : Krisiandi'''
     print(sentence)
     print(encode(sentence))
 
     word = 'temaniku'
     word = 'makananku'
     word = 'putuskanlah'
-    word = 'tanggung-jawab.'
+    word = 'pertanggung-jawaban'
     # word= ''
     print(encode_word(word))
     # print(TextNormalizer.normalize_text(sentence))
