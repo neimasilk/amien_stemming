@@ -275,10 +275,10 @@ def tampungan(text):
             return 'me'
         else:
             if text[:2] == 'te':
-                return 'te'
+                return 'ter'
             else:
                 if text[:2] == 'be':
-                    return 'be'
+                    return 'ber'
                 # else:
     return ''
 
@@ -324,11 +324,20 @@ def encode_awalan(kata_imbuhan, kata_dasar):
     if tampung[:2] == 'be' and len(tampung) > 3:
         tampung = 'ber' + tampungan(tampung[3:])
 
+    if tampung[:2] == 'te' and len(tampung) > 3:
+        tampung = 'ter' + tampungan(tampung[3:])
+
     if tampung[:2] == 'pe' and len(tampung) < 5:
         tampung = 'pe'  # + tampungan(tampung[4:])
 
     if tampung[:2] == 'me' and len(tampung) < 5:
         tampung = 'me'  # + tampungan(tampung[4:])
+
+    if tampung[:2] == 'be' and len(tampung) < 5:
+        tampung = 'ber'  # + tampungan(tampung[4:])
+
+    if tampung[:2] == 'te' and len(tampung) < 5:
+        tampung = 'ter'  # + tampungan(tampung[4:])
 
     if tampung != '':
         tampung += '~ '
@@ -348,6 +357,7 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
     pos = 0
     mulai_kata = False
     akhiran = False
+    # print(list(aln1),list(smbl))
     for char in aln1:
         if char == smbl[pos]:
             mulai_kata = True
@@ -358,14 +368,19 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
             tampung += char
         pos += 1
 
+    # print(tampung)
+
     if tampung[:3] == ' ~i' and len(tampung) > 3:
-        tampung = ' ~i' + ' ~' + tampung[3:]
+        a=(' ~' + tampung[3:]) if tampung[3]!='-' else ''
+        tampung = ' ~i' + a
 
     if tampung[:4] == ' ~an' and len(tampung) > 4:
-        tampung = ' ~an' + ' ~' + tampung[4:]
+        a=(' ~' + tampung[4:]) if tampung[4]!='-' else ''
+        tampung = ' ~an' + a
 
     if tampung[:5] == ' ~kan' and len(tampung) > 5:
-        tampung = ' ~kan' + ' ~' + tampung[5:]
+        a=(' ~' + tampung[5:]) if tampung[5]!='-' else ''
+        tampung = ' ~kan' + a
 
     if tampung == ' ~':
         tampung = ''
@@ -376,6 +391,8 @@ def encode_akhiran(kata_imbuhan, kata_dasar):
 def encode_word(text1):
     text1 = text1.lower()
     text1 = text1.strip()
+    if len(text1)<3:
+        return text1
     if not text1[-1].isalpha():
         char_akhir = text1[-1]
         text1 = text1[:-1]
@@ -399,28 +416,24 @@ def encode_word(text1):
 
     if text1 == 'menangis':
         hasil = 'me~ tangis'
+    if text1 == 'menganti':
+        hasil = 'menganti'
     if text1 == 'peperangan':
         hasil = 'pe~ perang ~an'
     if text1 == 'pemberitahuan':
         hasil = 'pe~ beritahu ~an'
     if text1 == 'pemilu':
         hasil = 'pemilu'
-    if text1 == 'bagian':
-        hasil = 'bagi ~an'
+    if text1 == 'peling':
+        hasil = 'peling'
     if text1 == 'mengecek':
         hasil = 'me~ cek'
-    if text1 == 'mengakomodir':
-        hasil = 'me~ akomodir'
-    if text1 == 'menyejahterakan':
-        hasil = 'me~ sejahtera ~kan'
-    if text1 == 'diperingan':
-        hasil = 'di~ pe~ ringan'
 
 
     return hasil
 
 def special_case(kata):
-    if kata[0] in ['p','w','y','g','h','q','k','b','f','v','r','c','d','j','z']:
+    if kata[0] in ['p','t','w','y','g','h','q','k','b','f','v','r','c','d','j','z','s']:
         return kata[1:], True
     return kata, False
 
@@ -445,7 +458,7 @@ if __name__ == '__main__':
     # word = 'mengakomodir'
     # word_plural1 = 'meniru-nirukan'
     # word_plural2 = 'berbalas-balasan'
-    # print(stemku.stem('peternakan'))
+    print(stemku.stem('peperangan'))
     # # print(stem_plural_word(word_plural1))
     #
     # # TESTING KEDUA FOKUS DI BER
@@ -469,6 +482,14 @@ if __name__ == '__main__':
     word = 'perwujudan' #ok
     word = 'pemakaian' #NOT OK
     word = 'diadukan' #NOT OK
+    word = 'menampilkan' # OK
+    word = 'bertujuan'
+    word = 'pemasukan'
+    word = 'menyebabkan'
+    word = 'peperangan'
+    word = 'diperingan'
+    word = 'goresan-goresan'
+    word = 'minister'
 
 
     print(encode_word(word))

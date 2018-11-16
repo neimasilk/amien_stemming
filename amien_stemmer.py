@@ -14,7 +14,7 @@ stemku = factory.create_stemmer()
 
 
 def encode(text):
-    normalizedText = TextNormalizer.normalize_text(text)
+    normalizedText =  TextNormalizer.normalize_text(text)
 
     words = normalizedText.split(' ')
     stems = []

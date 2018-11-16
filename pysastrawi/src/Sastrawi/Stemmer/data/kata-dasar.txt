@@ -473,6 +473,7 @@ akmal
 akolade
 akomodasi
 akomodatif
+akomodir
 akor
 akordeon
 akrab
@@ -16043,7 +16044,6 @@ limpung
 limun
 limusin
 limut
-lin
 linang
 linau
 lincah
@@ -17911,7 +17911,6 @@ misoginis
 mispersepsi
 miss
 mistar
-mister
 misteri
 misterius
 mistik
@@ -20193,9 +20192,7 @@ pastoral
 pastoran
 pastur
 pastura
-pasu
 pasuel
-pasuk
 pasumandan
 pasung
 patah
@@ -20821,7 +20818,6 @@ perincit
 perineorium
 perineum
 perineurium
-pering
 peringgan
 peringgi
 peringgitan
@@ -23277,7 +23273,6 @@ rincu
 rindang
 rinding
 rindu
-ring
 ringan
 ringgit
 ringih

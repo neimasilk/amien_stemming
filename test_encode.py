@@ -5,7 +5,7 @@ from amien_stemmer import encode
 class TestEncode(TestCase):
     def test_encode_kalimat(self):
         text1='Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan, kami sangat membangga-banggakannya.'
-        text_hasil1 = 'pe~ ekonomi ~an indonesia sedang dalam pe~ tumbuh ~an yang me~ bangga ~kan, kami sangat me~ ulg~ bangga ~kan ~nya.'
+        text_hasil1 = 'pe~ ekonomi ~an indonesia sedang dalam pe~ tumbuh ~an yang me~ bangga ~kan kami sangat me~ ulg~ bangga ~kan ~nya'
         self.assertEqual(text_hasil1,encode(text1))
 
     def test_encode_kata_plural(self):
@@ -39,7 +39,7 @@ class TestEncode(TestCase):
         word2 = 'kupu-kupu'
         word2_hsl = 'kupu-kupu'
         word3 = 'jalan-jalan.'
-        word3_hsl = 'ulg~ jalan.'
+        word3_hsl = 'ulg~ jalan'
         word = 'menyejahterakan'
         word_hsl = 'me~ sejahtera ~kan'
         word_plural1 = 'meniru-nirukan'
@@ -59,7 +59,7 @@ class TestEncode(TestCase):
         wword2 = 'kupu-kupu'
         wword2_hsl = 'kupu-kupu'
         wword3 = 'jalan-jalan.'
-        wword3_hsl = 'ulg~ jalan.'
+        wword3_hsl = 'ulg~ jalan'
         wword4 = 'pemberitahuan'
         wword4_hsl = 'pe~ beritahu ~an'
         wword5 = 'pemilu'
