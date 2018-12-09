@@ -189,15 +189,6 @@ factory = StemmerFactory()
 stemku = factory.create_stemmer()
 
 
-# TODO SELANJUTNYA: buat encode untuk plural
-# def stem_word(word):
-#     """Stem a word to its common stem form."""
-#     if is_plural(word):
-#         return stem_plural_word(word)
-#     else:
-#         return stem_singular_word(word)
-#
-
 def is_plural(word):
     # -ku|-mu|-nya
     # nikmat-Ku, etc

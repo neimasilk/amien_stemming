@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../amien_stemming/.idea/amien_stemming.iml" filepath="$PROJECT_DIR$/../amien_stemming/.idea/amien_stemming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/amien_stemming.iml" filepath="$PROJECT_DIR$/.idea/amien_stemming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../kompas_remote/.idea/kompas_remote.iml" filepath="$PROJECT_DIR$/../kompas_remote/.idea/kompas_remote.iml" />
     </modules>
   </component>
 </project>
