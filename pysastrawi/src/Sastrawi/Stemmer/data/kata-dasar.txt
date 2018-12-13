@@ -8401,7 +8401,6 @@ geplak
 gepok
 geprak
 gepuk
-gera
 gerabah
 gerabak
 gerabang
@@ -20918,6 +20917,7 @@ perot
 perpatih
 perpetuasi
 perponding
+perpres
 pers
 persada
 persangga
