@@ -65,7 +65,9 @@ def cari_awalan_dan_hrf_awal(awal,hrf_awal,jumlah):
 if __name__ == '__main__':
     if len(sys.argv)==3:
         cari_awalan(sys.argv[1],int(sys.argv[2]))
-    elif (len(sys.argv)==4):
-        cari_awalan_dan_hrf_awal(sys.argv[1],sys.argv[2],int(sys.argv[3]))
+    elif (len(sys.argv) == 4):
+        cari_awalan_dan_hrf_awal(sys.argv[1], sys.argv[2], int(sys.argv[3]))
+    elif (len(sys.argv) == 2):
+        cari_semua(int(sys.argv[2]))
     else:
         cari_semua(20)
