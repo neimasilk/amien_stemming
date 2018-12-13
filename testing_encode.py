@@ -17,7 +17,7 @@ def read_words(filename):
                 yield word
         yield last
 
-def cari(awal,jumlah):
+def cari_awalan(awal,jumlah):
     count = 0
     for word in read_words('wikipedia_id.txt'):
         # print(word)
@@ -45,9 +45,27 @@ def cari_semua(jumlah):
             if count == jumlah:
                 break
 
+def cari_awalan_dan_hrf_awal(awal,hrf_awal,jumlah):
+    count = 0
+    for word in read_words('wikipedia_id.txt'):
+        # print(word)
+        normalizedText = TextNormalizer.normalize_text(word)
+        kata = encode(word)
+        if normalizedText!=kata:
+            awalan = kata.split()[0]
+            hrf_awalan = kata.split()[1][:1]
+            if awalan[-1:]=='~':
+                if (awalan[:2]==awal and hrf_awalan==hrf_awal):
+                    # print(awalan)
+                    print(normalizedText+ ' = '+ kata)
+                    count+=1
+                    if count == jumlah:
+                        break
 
 if __name__ == '__main__':
     if len(sys.argv)==3:
-        cari(sys.argv[1],int(sys.argv[2]))
+        cari_awalan(sys.argv[1],int(sys.argv[2]))
+    elif (len(sys.argv)==4):
+        cari_awalan_dan_hrf_awal(sys.argv[1],sys.argv[2],int(sys.argv[3]))
     else:
-        cari_semua(10)
+        cari_semua(20)
