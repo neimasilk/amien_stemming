@@ -53,7 +53,7 @@ def cari_awalan_dan_hrf_awal(awal,hrf_awal,jumlah):
         kata = encode(word)
         if normalizedText!=kata:
             awalan = kata.split()[0]
-            hrf_awalan = kata.split()[1][:1]
+            hrf_awalan = kata.split()[1][:len(hrf_awal)]
             if awalan[-1:]=='~':
                 if (awalan[:2]==awal and hrf_awalan==hrf_awal):
                     # print(awalan)
