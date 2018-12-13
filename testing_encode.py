@@ -16,12 +16,21 @@ def read_words(filename):
                 yield word
         yield last
 
-count = 0
-for word in read_words('wikipedia_id.txt'):
-    # print(word)
-    normalizedText = TextNormalizer.normalize_text(word)
-    if normalizedText!=encode(word):
-        print(normalizedText+ ' = '+ encode(word))
-        count+=1
-        if count == 300:
-            break
+def cari(awal,jumlah):
+    count = 0
+    for word in read_words('wikipedia_id.txt'):
+        # print(word)
+        normalizedText = TextNormalizer.normalize_text(word)
+        kata = encode(word)
+        if normalizedText!=kata:
+            awalan = kata.split()[0]
+            if awalan[-1:]=='~':
+                if (awalan[:2]==awal):
+                    # print(awalan)
+                    print(normalizedText+ ' = '+ kata)
+                    count+=1
+                    if count == jumlah:
+                        break
+
+if __name__ == '__main__':
+    cari('me',10)
