@@ -2261,7 +2261,6 @@ bandusa
 bandut
 bang
 bangai
-bangan
 bangang
 bangar
 bangas
@@ -2980,9 +2979,7 @@ beranang
 beranda
 berandal
 berandang
-berang
 berangai
-berangan
 berangas
 berangasan
 berangga
@@ -7011,7 +7008,6 @@ erti
 eru
 erupsi
 es
-esa
 esai
 esais
 esak
@@ -20514,6 +20510,7 @@ pemendak
 pemeo
 pemetikan
 pemidang
+pemilu
 pemindang
 peminggir
 pempek
@@ -22255,6 +22252,7 @@ qasar
 qiamulail
 qiraah
 qiraat
+qisash
 qudsi
 quran
 raba
@@ -23076,7 +23074,6 @@ rerongkong
 rerot
 rerugi
 reruntuk
-resa
 resah
 resak
 resam

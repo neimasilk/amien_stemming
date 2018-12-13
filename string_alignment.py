@@ -413,12 +413,18 @@ def encode_word(text1):
         hasil = 'pe~ perang ~an'
     if text1 == 'pemberitahuan':
         hasil = 'pe~ beritahu ~an'
-    if text1 == 'pemilu':
-        hasil = 'pemilu'
     if text1 == 'peling':
         hasil = 'peling'
     if text1 == 'mengecek':
         hasil = 'me~ cek'
+    if text1 == 'berseberangan':
+        hasil = 'ber~ seberang ~an'
+    if text1 == 'beterbangan':
+        hasil = 'ber~ terbang ~an'
+    if text1 == 'berterbangan':
+        hasil = 'ber~ terbang ~an'
+    if text1 == 'temanggung':
+        hasil = 'temanggung'
 
 
     return hasil

@@ -45,7 +45,7 @@ Editor : Krisiandi'''
     word = 'temaniku'
     word = 'makananku'
     word = 'putuskanlah'
-    word = 'pertanggung-jawaban'
+    word = 'mengkalkulasi'
     # word= ''
     print(encode_word(word))
     # print(TextNormalizer.normalize_text(sentence))
