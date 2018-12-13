@@ -68,6 +68,6 @@ if __name__ == '__main__':
     elif (len(sys.argv) == 4):
         cari_awalan_dan_hrf_awal(sys.argv[1], sys.argv[2], int(sys.argv[3]))
     elif (len(sys.argv) == 2):
-        cari_semua(int(sys.argv[2]))
+        cari_semua(int(sys.argv[1]))
     else:
         cari_semua(20)
