@@ -1,5 +1,6 @@
 from amien_stemmer import encode
 from Sastrawi.Stemmer.Filter import TextNormalizer
+import sys
 
 # print(encode('ini adalah percobaan, semoga berhasil, terima kasih'))
 
@@ -32,5 +33,21 @@ def cari(awal,jumlah):
                     if count == jumlah:
                         break
 
+def cari_semua(jumlah):
+    count = 0
+    for word in read_words('wikipedia_id.txt'):
+        # print(word)
+        normalizedText = TextNormalizer.normalize_text(word)
+        kata = encode(word)
+        if normalizedText!=kata:
+            print(normalizedText + ' = ' + kata)
+            count += 1
+            if count == jumlah:
+                break
+
+
 if __name__ == '__main__':
-    cari('me',10)
+    if len(sys.argv)==3:
+        cari(sys.argv[1],sys.argv[2])
+    else:
+        cari_semua(10)
