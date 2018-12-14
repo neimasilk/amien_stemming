@@ -425,6 +425,10 @@ def encode_word(text1):
         hasil = 'ber~ terbang ~an'
     if text1 == 'temanggung':
         hasil = 'temanggung'
+    if text1 == 'berpenduduk':
+        hasil = 'ber~ pe~ duduk'
+    if text1 == 'menyetujui':
+        hasil = 'me~ setuju ~i'
 
 
     return hasil

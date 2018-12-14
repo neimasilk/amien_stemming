@@ -303,7 +303,6 @@ agak
 agak-agih
 agal
 agalaksia
-agam
 agama
 agamais
 agamawi
@@ -25311,6 +25310,7 @@ setrum
 setrup
 setti
 setu
+setuju
 setuil
 setum
 setung
